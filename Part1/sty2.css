@@ -1,0 +1,20 @@
+div {
+    display: none;
+   }
+
+span{
+    font-size: 16px;
+}
+span:hover {
+    background-color: yellow;
+    font-weight: bold;
+} 
+
+span:hover + div{
+    
+    display:inline;
+
+}
+
+
+
