@@ -19,11 +19,9 @@ var y = d3.scaleLinear().range([height, 0]);
 var g = svg.append("g")
  .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-
 d3.csv(csvfile, function(i){
     return i;
 }).then(function(data) { 
-
  x.domain( data.map(function(d) { return d.year; }) );
  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -65,8 +63,12 @@ d3.csv(csvfile, function(i){
 
     g.append("text")
     .attr('class', 'val') 
-    .attr('x', x)
-    .attr('y', y)
+    .attr('x', function() {
+    return x(d.year);
+    })
+    .attr('y', function() {
+    return y(d.value) - 15;
+    })
     .text( function() { return '$' + d.value; } ); // Value of the text
    
  })

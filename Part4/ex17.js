@@ -19,13 +19,14 @@ var y = d3.scaleLinear().range([height, 0]);
 var g = svg.append("g")
  .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-
 d3.csv(csvfile, function(i){
     return i;
 }).then(function(data) { 
 
  x.domain( data.map(function(d) { return d.year; }) );
  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+ var colorRange = d3.scaleLinear().domain([d3.min(data, function(d) { return d.value; }),d3.max(data, function(d) { return d.value; })]).range(["blue", "red"]);
 
  g.append("g")
  .attr("transform", "translate(0," + height + ")")
@@ -65,8 +66,15 @@ d3.csv(csvfile, function(i){
 
     g.append("text")
     .attr('class', 'val') 
-    .attr('x', x)
-    .attr('y', y)
+    .attr('x', function() {
+    return x(d.year) + (x.bandwidth()/4);
+    })
+    .attr('y', function() {
+    return y(d.value) - 15;
+    })
+    .attr("fill", i => colorRange(d.value))
+    .attr("font-family","monospace")
+    .attr("font-weight","bold")
     .text( function() { return '$' + d.value; } ); // Value of the text
    
  })
@@ -96,6 +104,3 @@ d3.csv(csvfile, function(i){
 
 
 });
-
-
-   
