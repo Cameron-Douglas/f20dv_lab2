@@ -56,13 +56,13 @@ d3.csv(csvfile, function(i){
  .attr("class", "bar")
  .on("mouseover", function(event, d, i){
 
-    d3.select(this).attr('class', 'highlight');
     d3.select(this)
     .transition() // adds animation
     .duration(400)
     .attr('width', x.bandwidth() + 5)
     .attr("y", function(d) { return y(d.value) - 10; })
-    .attr("height", function(d) { return height - y(d.value) + 10; });
+    .attr("height", function(d) { return height - y(d.value) + 10; })
+    .style("fill", i => colorRange(d.value));
 
     g.append("text")
     .attr('class', 'val') 
@@ -80,13 +80,13 @@ d3.csv(csvfile, function(i){
  })
  .on("mouseout", function(event, d,i){
    
-    d3.select(this).attr('class', 'bar');
     d3.select(this)
     .transition() // adds animation
     .duration(400)
     .attr('width', x.bandwidth())
     .attr("y", function() { return y(d.value); })
-    .attr("height", function() { return height - y(d.value); });
+    .attr("height", function() { return height - y(d.value); })
+    .style("fill","SteelBlue");
 
     d3.selectAll('.val')
     .remove()
