@@ -71,8 +71,6 @@ const data1 = [
    }
    // A function that create / update the plot for a given variable:
    function update(data, color) {
-    console.log(prevLength);
-    console.log(data.length);
     
     let arr = [1];
 
@@ -96,7 +94,7 @@ const data1 = [
             .exit()
             .remove()
     }
-
+    
     var u = svg.selectAll("rect")
     .data(data)
     u.enter()
