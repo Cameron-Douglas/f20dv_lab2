@@ -67,6 +67,7 @@ d3.csv(csvfile, function(i){
     g.append("text")
     .attr('class', 'val') 
     .attr('x', function() {
+       console.log(d.year);
     return x(d.year) + (x.bandwidth()/4);
     })
     .attr('y', function() {
