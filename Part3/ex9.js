@@ -1,3 +1,6 @@
+//Append 3 divs to the body, one with an ease Bounce, one with ease Elastic and the other ease Linear 
+
+
 d3.select('body')
  .append("div")
  .style('width', '100px')

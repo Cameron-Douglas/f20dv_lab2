@@ -14,17 +14,21 @@ svg.append("text")
  .attr("font-family","monospace")
  .attr("fill","DarkSlateGrey");
 
+// Create scale variables for the axes
 var x = d3.scaleBand().range([0, width]).padding(0.4);
 var y = d3.scaleLinear().range([height, 0]);
 var g = svg.append("g")
  .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
+// Read data in from CSV file
 d3.csv(csvfile, function(i){
     return i;
 }).then(function(data) { 
+
  x.domain( data.map(function(d) { return d.year; }) );
  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
+// Append bottom axis and label
  g.append("g")
  .attr("transform", "translate(0," + height + ")")
  .call(d3.axisBottom(x))
@@ -35,6 +39,7 @@ d3.csv(csvfile, function(i){
  .attr("stroke", "black")
  .text("Year");
 
+// Append left axis and label
  g.append("g")
  .call(d3.axisLeft(y).tickFormat(function(d){
  return "$" + d;
@@ -53,6 +58,7 @@ d3.csv(csvfile, function(i){
  .attr("class", "bar")
  .on("mouseover", function(event, d, i){
 
+   //Modifies the mouseover behavior to instead set the x and y value relative to the data of each bar so that the label appears above the bar
     d3.select(this).attr('class', 'highlight');
     d3.select(this)
     .transition() // adds animation

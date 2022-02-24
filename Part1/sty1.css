@@ -1,11 +1,5 @@
 .pulse {
-    border: 1px solid blue;
-    fill: lightblue;
     stroke: purple;
-    -webkit-transform: scale(1);
-    -webkit-transform-origin: 10% 10%;
-    transform: scale(1);
-    transform-origin: 10% 10%;
    }
    .pulse:hover
    {
@@ -13,20 +7,18 @@
     -webkit-animation-duration: 0.5s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: alternate;
+
     animation-name: pulsar;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    -webkit-transform-origin: 10% 10%;
-    transform-origin: 10% 10%; 
    }
+
+   /*
+    Using keyframes pulsar to change the color of each dot to orange so that they appear to pulse
+   */
    @keyframes pulsar {
-    from {
-    
-    }
     to {
-        fill:crimson;
-    transform: scale(1,1);
-    transform-origin: 10% 10%;
+        fill:orange;
     }
    }

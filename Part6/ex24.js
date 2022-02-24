@@ -5,11 +5,14 @@ let date1 = new Date(2022,1,16);
 let date2 = new Date(2000,5,07);
 let dateInterpolate = d3.interpolateDate(date1,date2);
 
+const u = d3.select("body");
 
-d3.select("body")
-.append("h5")
+// Append Heading
+u.append("h5")
 .text("Exercise 24:")
-.append("div")
+
+// Append body text for exercise 24
+u.append("div")
 .text("Type of returned function is: " + typeof (intr))
 .append("div")
 .text("intr(0.2) => " +  intr(0.2))
@@ -23,9 +26,13 @@ d3.select("body")
 .append("div")
 .append("p")
 .text(" ")
-.append("h5")
+
+// Append Heading
+u.append("h5")
 .text("Exercise 25:")
-.append("div")
+
+// Append body text for exercise 25
+u.append("div")
 .text("'cc' is the interpolator between ")
 .append("span")
 .text('red ')
@@ -49,9 +56,13 @@ d3.select("body")
 .append("div")
 .append("p")
 .text(" ")
-.append("h5")
+
+// Append Heading
+u.append("h5")
 .text("Exercise 26:")
-.append("div")
+
+// Append body text for exercise 26
+u.append("div")
 .text("'date1' is: "+date1 + " and 'date2' is: " + date2)
 .style("font-weight","normal")
 .append("div")

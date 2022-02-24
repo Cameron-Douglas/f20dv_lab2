@@ -14,11 +14,13 @@ svg.append("text")
  .attr("font-family","monospace")
  .attr("fill","DarkSlateGrey");
 
+// Create scale variables for the axes
 var x = d3.scaleBand().range([0, width]).padding(0.4);
 var y = d3.scaleLinear().range([height, 0]);
 var g = svg.append("g")
  .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
+// Read data in from CSV file
 d3.csv(csvfile, function(i){
     return i;
 }).then(function(data) { 
@@ -26,8 +28,11 @@ d3.csv(csvfile, function(i){
  x.domain( data.map(function(d) { return d.year; }) );
  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
+
+// Create a color range scaled by the min and max value of the data 
  var colorRange = d3.scaleLinear().domain([d3.min(data, function(d) { return d.value; }),d3.max(data, function(d) { return d.value; })]).range(["blue", "red"]);
 
+ // Append bottom axis and label
  g.append("g")
  .attr("transform", "translate(0," + height + ")")
  .call(d3.axisBottom(x))
@@ -38,6 +43,7 @@ d3.csv(csvfile, function(i){
  .attr("stroke", "black")
  .text("Year");
 
+// Append left axis and label
  g.append("g")
  .call(d3.axisLeft(y).tickFormat(function(d){
  return "$" + d;
@@ -50,6 +56,7 @@ d3.csv(csvfile, function(i){
  .attr("stroke", "black")
  .text("Stock Price");
 
+// Appends bar an denotes mouseover behavior
  g.selectAll(".bar")
  .data(data)
  .enter().append("rect")
@@ -62,7 +69,7 @@ d3.csv(csvfile, function(i){
     .attr('width', x.bandwidth() + 5)
     .attr("y", function(d) { return y(d.value) - 10; })
     .attr("height", function(d) { return height - y(d.value) + 10; })
-    .style("fill", i => colorRange(d.value));
+    .style("fill", i => colorRange(d.value)); //Changes the color based on the value of the bar
 
     g.append("text")
     .attr('class', 'val') 
@@ -87,7 +94,7 @@ d3.csv(csvfile, function(i){
     .attr('width', x.bandwidth())
     .attr("y", function() { return y(d.value); })
     .attr("height", function() { return height - y(d.value); })
-    .style("fill","SteelBlue");
+    .style("fill","SteelBlue"); // Re-sets the color back to original
 
     d3.selectAll('.val')
     .remove()

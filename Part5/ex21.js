@@ -20,7 +20,7 @@ const data1 = [
    // set the dimensions and margins of the graph
    const margin = {top: 30, right: 30, bottom: 70, left: 60};
    const width = 460 - margin.left - margin.right;
-   const height = 400 - margin.top - margin.bottom;
+   const height = 460 - margin.top - margin.bottom;
 
    // append the svg object to the body of the page
    var svg = d3.select('body')
@@ -37,6 +37,7 @@ const data1 = [
     .range([ 0, width ])
     .domain(data1.map(function(d) { return d.group; }))
     .padding(0.2);
+
    svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
@@ -45,18 +46,22 @@ const data1 = [
    var y = d3.scaleLinear()
     .domain([0, 20])
     .range([ height, 0]);
+
    svg.append("g")
     .attr("class", "myYaxis")
     .call(d3.axisLeft(y));
 
+    // Add top axis
     var xtop = d3.scaleBand()
     .range([ 0, width ])
     .domain(data1.map(function(d) { return d.group; }))
     .padding(0.2);
+
    svg.append("g")
     .attr("transform", "translate(0," + y.domain[1] + ")")
     .call(d3.axisTop(xtop));
 
+    // Add right axis
    svg.append("g")
     .attr("class", "myYaxis")
     .attr("transform", "translate("+ width + ",0 )")
@@ -92,9 +97,11 @@ const data1 = [
    // Initialize the plot with the first dataset
    update(data1,1)
 
+
+   // Define mouseover behaviour
    svg.selectAll("rect")
    .on("mouseover", function(event, d, i){
-    
+        // Append text above bar
        svg.append("text")
        .attr('class', 'val') 
        .attr("x", function() { return -15; })
@@ -109,7 +116,8 @@ const data1 = [
       
     })
     .on("mouseout", function(event, d,i){
-    
+        
+        // Remove label on mouseout
         d3.selectAll('.val')
         .attr("x", function() { return (x(d.group)+(x.bandwidth()/2)-5); })
        .attr("y", function() { return y(d.value)-10 ; })

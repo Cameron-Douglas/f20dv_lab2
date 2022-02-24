@@ -20,7 +20,7 @@ const data1 = [
    // set the dimensions and margins of the graph
    const margin = {top: 30, right: 30, bottom: 70, left: 60};
    const width = 460 - margin.left - margin.right;
-   const height = 400 - margin.top - margin.bottom;
+   const height = 460 - margin.top - margin.bottom;
 
    // append the svg object to the body of the page
    var svg = d3.select('body')
@@ -45,6 +45,7 @@ const data1 = [
    var y = d3.scaleLinear()
     .domain([0, 20])
     .range([ height, 0]);
+    
    svg.append("g")
     .attr("class", "myYaxis")
     .call(d3.axisLeft(y));
@@ -52,7 +53,9 @@ const data1 = [
    // A function that create / update the plot for a given variable:
    function update(data, color) {
     var u = svg.selectAll("rect")
-    .data(data)
+    .data(data);
+
+    // Append rects to the SVG
     u.enter()
     .append("rect")
     .merge(u)
@@ -79,6 +82,8 @@ const data1 = [
    // Initialize the plot with the first dataset
    update(data1,1)
 
+
+   // Append text with bar values on mouseover
    svg.selectAll("rect")
    .on("mouseover", function(event, d, i){
     
@@ -95,6 +100,7 @@ const data1 = [
        .text( function() { return d.value; } ); // Value of the text
       
     })
+    // Remove labels on mouse out
     .on("mouseout", function(event, d,i){
     
         d3.selectAll('.val')

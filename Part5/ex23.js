@@ -34,7 +34,7 @@ const x = d3.scaleLinear()
 .range([0, width]);
 
 //Y Axis
-let y = d3.scaleLinear()
+const y = d3.scaleLinear()
 .domain([ yExtent[0], yExtent[1] ])
 .range([ height, 0]);
 
@@ -86,7 +86,8 @@ u.enter()
    .datum(data)
    .merge(u)
    .transition()
-   .duration(1000)
+   .duration(700)
+   .style("opacity",1.0)
    .attr("fill", "none")
    .attr("stroke", "steelblue")
    .attr("stroke-width", 1.5)

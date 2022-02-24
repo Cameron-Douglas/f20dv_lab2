@@ -86,7 +86,7 @@ function plotGraph(data,color){
      .attr("cx", function (d) { return x(d.x) } )
      .attr("cy", function (d) { return y(d.y) } )
      .attr("r", 5)
-     .classed("pulse",true)
+     .classed("pulse",true) // Setting each dot to be of class pulse so that they pulse on hover
      .style("fill", color);
 
   }

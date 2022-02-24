@@ -1,3 +1,4 @@
+//Append 3 rects to the body
 var svg = d3.select("body")
  .append("svg")
  .attr("width", 500)
@@ -27,6 +28,7 @@ var svg = d3.select("body")
  update();
  shrink();
 
+//update, changes bar colors and scales after a determined period of time
 function update() {
  bar1.transition()
  .ease(d3.easeLinear)
@@ -47,6 +49,7 @@ function update() {
  .attr("fill", "red");
 }
 
+//shrink, returns all bars to their original size and color
 function shrink(){
 bar1.transition()
  .ease(d3.easeLinear)

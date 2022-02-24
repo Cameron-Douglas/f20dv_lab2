@@ -1,7 +1,7 @@
 // create 2 data_set
 const data1 = [
     {group: "A", value: 5},
-    {group: "B", value: 20},
+    {group: "B", value: 11},
     {group: "C", value: 9}
    ];
 
@@ -43,6 +43,7 @@ const data1 = [
     x.range([ 0, width ])
     .domain(data.map(function(d) { return d.group; }))
     .padding(0.2);
+
    svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
@@ -50,20 +51,22 @@ const data1 = [
    // Add Y axis
     y.domain([0, 20])
     .range([ height, 0]);
+
    svg.append("g")
     .attr("class", "myYaxis")
     .call(d3.axisLeft(y));
 
+    // Add top axis
     var xtop = d3.scaleBand()
     .range([ 0, width ])
     .domain(data.map(function(d) { return d.group; }))
     .padding(0.2);
 
-
    svg.append("g")
     .attr("transform", "translate(0," + y.domain[1] + ")")
     .call(d3.axisTop(xtop));
 
+    // Add right axis
    svg.append("g")
     .attr("class", "myYaxis")
     .attr("transform", "translate("+ width + ",0 )")
@@ -127,10 +130,11 @@ const data1 = [
    setupAxes(data1);
    update(data1,1)
    
-
+   // Define Mouseover behaviour
    svg.selectAll("rect")
    .on("mouseover", function(event, d, i){
     
+    // Append text above the bar
        svg.append("text")
        .attr('class', 'val') 
        .attr("x", function() { return -15; })
@@ -146,15 +150,16 @@ const data1 = [
     })
     .on("mouseout", function(event, d,i){
     
+        // Remove labels on mouseout
         d3.selectAll('.val')
         .attr("x", function() { return (x(d.group)+(x.bandwidth()/2)-5); })
-       .attr("y", function() { return y(d.value)-10 ; })
-       .transition()
-       .duration(1000)
-       .attr("x", function() { return -15; })
-       .attr("y", function() { return y(d.value) ; })
-       .transition()
-       .duration(500)
-       .attr("font-size","1px")
+        .attr("y", function() { return y(d.value)-10 ; })
+        .transition()
+        .duration(1000)
+        .attr("x", function() { return -15; })
+        .attr("y", function() { return y(d.value) ; })
+        .transition()
+        .duration(500)
+        .attr("font-size","1px")
         .remove()
      })
