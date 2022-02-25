@@ -119,7 +119,7 @@ var simulation = d3.forceSimulation(nodes)
 
 // Update sim with mutated variables 
 function updateSim(){
-    simulation.force("r", d3.forceRadial(d => d.type === "a" ? r1 : r2, x, y).strength(strength))
+    simulation.force("radial", d3.forceRadial(d => d.type === "a" ? r1 : r2, x, y).strength(strength))
 }
 
 function ticked() { node.attr("cx", d => d.x).attr("cy", d => d.y);
