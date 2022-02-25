@@ -82,6 +82,7 @@ const data1 = [
    // Initialize the plot with the first dataset
    update(data1,1)
 
+   let xmargin = -15;
 
    // Append text with bar values on mouseover
    svg.selectAll("rect")
@@ -89,7 +90,7 @@ const data1 = [
     
        svg.append("text")
        .attr('class', 'val') 
-       .attr("x", function() { return -15; })
+       .attr("x", function() { return xmargin; })
        .attr("y", function() { return y(d.value) ; })
        .attr("fill","DarkSlateGrey")
        .transition()
@@ -102,13 +103,11 @@ const data1 = [
     })
     // Remove labels on mouse out
     .on("mouseout", function(event, d,i){
-    
+        
         d3.selectAll('.val')
-        .attr("x", function() { return (x(d.group)+(x.bandwidth()/2)-5); })
-       .attr("y", function() { return y(d.value)-10 ; })
        .transition()
        .duration(1000)
-       .attr("x", function() { return -15; })
+       .attr("x", function() { return xmargin; })
        .attr("y", function() { return y(d.value) ; })
        .transition()
        .duration(500)
