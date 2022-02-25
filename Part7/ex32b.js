@@ -1,3 +1,5 @@
+// Example initially seen at: https://observablehq.com/@john-guerra/d3-forceradial 
+
 // Define SVG dimentions
 const width = 900
 const height = 900
@@ -18,8 +20,8 @@ let strength = strengthSlider.value;
 
 // Initialise node array
 const nodes = [].concat(
-    d3.range(360).map(function() { return {type: "a", x:Math.random()*width, y: Math.random()*height}; }),
-    d3.range(200).map(function() { return {type: "b"}; })
+    d3.range(300).map(function() { return {type: "a", x:Math.random()*width, y: Math.random()*height}; }),
+    d3.range(150).map(function() { return {type: "b", x:Math.random()*width, y: Math.random()*height}; })
   )
 
 // SVG variable
@@ -111,7 +113,7 @@ strengthSlider.oninput = function() {
 // initialise simulation
 var simulation = d3.forceSimulation(nodes)
     .force("charge", d3.forceCollide().radius(5).iterations(2))
-    .force("r", d3.forceRadial(d => d.type === "a" ? r1 : r2, x, y).strength(strength))
+    .force("radial", d3.forceRadial(d => d.type === "a" ? r1 : r2, x, y).strength(strength))
     .on("tick", ticked)
     .alphaTarget(0.1)
 
